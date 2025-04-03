@@ -1,4 +1,4 @@
-package com.example.projetolitroz.ui.home
+package com.example.projetolitroz.ui.tasks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +9,7 @@ import com.example.projetolitroz.ui.room.TasksDatabase
 import kotlinx.coroutines.launch
 import java.util.UUID
 
-class HomeViewModel : ViewModel() {
+class TasksViewModel : ViewModel() {
     lateinit var database: TasksDatabase
     val tasksLiveData by lazy { MutableLiveData<List<Tasks>>() }
 

@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.room.Room
 import com.example.projetolitroz.databinding.ActivityMainBinding
-import com.example.projetolitroz.ui.home.HomeViewModel
+import com.example.projetolitroz.ui.tasks.TasksViewModel
 import com.example.projetolitroz.ui.room.TasksDatabase
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+            ViewModelProvider(this).get(TasksViewModel::class.java)
 
 //        homeViewModel.database = dataBaseTask
 

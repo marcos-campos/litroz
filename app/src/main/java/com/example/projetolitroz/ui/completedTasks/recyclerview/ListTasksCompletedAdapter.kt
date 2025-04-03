@@ -1,4 +1,4 @@
-package com.example.projetolitroz.ui.dashboard.recyclerview
+package com.example.projetolitroz.ui.completedTasks.recyclerview
 
 import android.content.Context
 import android.view.LayoutInflater

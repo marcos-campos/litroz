@@ -1,4 +1,4 @@
-package com.example.projetolitroz.ui.home
+package com.example.projetolitroz.ui.tasks
 
 import java.util.UUID
 

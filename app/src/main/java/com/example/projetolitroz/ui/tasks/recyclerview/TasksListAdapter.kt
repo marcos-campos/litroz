@@ -1,4 +1,4 @@
-package com.example.projetolitroz.ui.home.recyclerview
+package com.example.projetolitroz.ui.tasks.recyclerview
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetolitroz.R
-import com.example.projetolitroz.ui.home.TaskWithId
+import com.example.projetolitroz.ui.tasks.TaskWithId
 
 class TasksListAdapter(
     private val context: Context,

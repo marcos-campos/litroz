@@ -1,22 +1,21 @@
-package com.example.projetolitroz.ui.home
+package com.example.projetolitroz.ui.tasks
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.example.projetolitroz.databinding.FragmentHomeBinding
-import com.example.projetolitroz.ui.home.recyclerview.TasksListAdapter
+import com.example.projetolitroz.databinding.FragmentTasksBinding
+import com.example.projetolitroz.ui.tasks.recyclerview.TasksListAdapter
 import com.example.projetolitroz.ui.room.Tasks
 import com.example.projetolitroz.ui.room.TasksDatabase
 
-class HomeFragment : Fragment() {
+class TasksFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentTasksBinding? = null
     private val binding get() = _binding!!
     private val dataBaseTask by lazy {
         Room.databaseBuilder(
@@ -32,11 +31,11 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+            ViewModelProvider(this).get(TasksViewModel::class.java)
 
         homeViewModel.database = dataBaseTask
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentTasksBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val buttonAddTask = binding.buttonAddTaskHome

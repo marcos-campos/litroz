@@ -1,4 +1,4 @@
-package com.example.projetolitroz.ui.dashboard
+package com.example.projetolitroz.ui.completedTasks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import com.example.projetolitroz.ui.room.Tasks
 import com.example.projetolitroz.ui.room.TasksDatabase
 import kotlinx.coroutines.launch
 
-class DashboardViewModel : ViewModel() {
+class CompletedTasksViewModel : ViewModel() {
 
     val tasksLiveData by lazy { MutableLiveData<List<Tasks>>() }
 
