@@ -46,10 +46,10 @@ class HomeFragment : Fragment() {
 
         val recyclerTasks: RecyclerView = binding.recyclerHome
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        val textView: TextView = binding.textHome
+//        homeViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
 
         homeViewModel.listTaskLiveData.observe(viewLifecycleOwner) { listTasks ->
             val adapterTasks = TasksListAdapter(

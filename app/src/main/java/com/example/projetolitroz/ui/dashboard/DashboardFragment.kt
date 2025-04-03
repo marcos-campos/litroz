@@ -42,11 +42,11 @@ class DashboardFragment : Fragment() {
         val root: View = binding.root
 
         val recyclerCompletedTasks: RecyclerView = binding.recyclerTasksCompleted
-        val textView: TextView = binding.textDashboard
-
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        val textView: TextView = binding.textDashboard
+//
+//        dashboardViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
 
         dashboardViewModel.getCompletedTasks(dataBaseTask)
 
