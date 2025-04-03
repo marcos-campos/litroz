@@ -1,8 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
-    id("kotlin-kapt")
+    id("kotlin-kapt")  // Incluindo o KAPT aqui
 }
 
 android {
@@ -47,6 +46,10 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version") // Substitua o KSP por KAPT
     implementation("androidx.room:room-ktx:$room_version")
+
+    // Koin
+    implementation("io.insert-koin:koin-android:3.3.0")
+//    implementation("io.insert-koin:koin-androidx-workmanager:3.1.2")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.7.0")

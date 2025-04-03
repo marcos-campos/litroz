@@ -8,7 +8,7 @@ import com.example.projetolitroz.ui.room.Tasks
 import com.example.projetolitroz.ui.room.TasksDatabase
 import kotlinx.coroutines.launch
 
-class CompletedTasksViewModel : ViewModel() {
+class CompletedTasksViewModel(private val database: TasksDatabase) : ViewModel() {
 
     val tasksLiveData by lazy { MutableLiveData<List<Tasks>>() }
 
@@ -17,7 +17,7 @@ class CompletedTasksViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    fun getCompletedTasks(database: TasksDatabase) {
+    fun getCompletedTasks() {
         viewModelScope.launch {
             val tasks = database.tasksDao().getAll()
             tasksLiveData.postValue(tasks)

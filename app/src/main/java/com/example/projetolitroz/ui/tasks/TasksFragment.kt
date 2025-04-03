@@ -12,29 +12,20 @@ import com.example.projetolitroz.databinding.FragmentTasksBinding
 import com.example.projetolitroz.ui.tasks.recyclerview.TasksListAdapter
 import com.example.projetolitroz.ui.room.Tasks
 import com.example.projetolitroz.ui.room.TasksDatabase
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TasksFragment : Fragment() {
 
     private var _binding: FragmentTasksBinding? = null
     private val binding get() = _binding!!
-    private val dataBaseTask by lazy {
-        Room.databaseBuilder(
-            requireContext(),
-            TasksDatabase::class.java,
-            "database")
-            .build()
-    }
+
+    private val homeViewModel: TasksViewModel by viewModel() // Injeção do ViewModel via Koin
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(TasksViewModel::class.java)
-
-        homeViewModel.database = dataBaseTask
-
         _binding = FragmentTasksBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -44,11 +35,6 @@ class TasksFragment : Fragment() {
         }
 
         val recyclerTasks: RecyclerView = binding.recyclerHome
-
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
 
         homeViewModel.listTaskLiveData.observe(viewLifecycleOwner) { listTasks ->
             val adapterTasks = TasksListAdapter(
@@ -62,6 +48,7 @@ class TasksFragment : Fragment() {
             )
             recyclerTasks.adapter = adapterTasks
         }
+
         return root
     }
 

@@ -9,8 +9,7 @@ import com.example.projetolitroz.ui.room.TasksDatabase
 import kotlinx.coroutines.launch
 import java.util.UUID
 
-class TasksViewModel : ViewModel() {
-    lateinit var database: TasksDatabase
+class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
     val tasksLiveData by lazy { MutableLiveData<List<Tasks>>() }
 
     private val _text = MutableLiveData<String>().apply {
@@ -18,16 +17,12 @@ class TasksViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    private val _listTask = MutableLiveData<List<TaskWithId>>().apply {
-//        value = arrayListOf(
-//            TaskWithId(name = "Tarefa")
-//        )
-    }
+    private val _listTask = MutableLiveData<List<TaskWithId>>()
     val listTaskLiveData: LiveData<List<TaskWithId>> = _listTask
 
     fun getTasks() {
         viewModelScope.launch {
-            val tasks  = database.tasksDao().getAll()
+            val tasks = database.tasksDao().getAll()
             tasksLiveData.postValue(tasks)
         }
     }
@@ -57,5 +52,4 @@ class TasksViewModel : ViewModel() {
         currentList.remove(task) // Remove a tarefa da lista
         _listTask.value = currentList // Atualiza o LiveData
     }
-
 }

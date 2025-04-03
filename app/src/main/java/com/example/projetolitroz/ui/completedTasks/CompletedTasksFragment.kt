@@ -11,11 +11,14 @@ import androidx.room.Room
 import com.example.projetolitroz.databinding.FragmentCompletedTasksBinding
 import com.example.projetolitroz.ui.completedTasks.recyclerview.ListTasksCompletedAdapter
 import com.example.projetolitroz.ui.room.TasksDatabase
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CompletedTasksFragment : Fragment() {
 
     private var _binding: FragmentCompletedTasksBinding? = null
     private val binding get() = _binding!!
+
+    private val dashboardViewModel: CompletedTasksViewModel by viewModel() // Injeção do ViewModel via Koin
 
     private val dataBaseTask by lazy {
         Room.databaseBuilder(
@@ -23,10 +26,6 @@ class CompletedTasksFragment : Fragment() {
             TasksDatabase::class.java,
             "database")
             .build()
-    }
-
-    private val dashboardViewModel: CompletedTasksViewModel by lazy {
-        ViewModelProvider(this).get(CompletedTasksViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -38,13 +37,8 @@ class CompletedTasksFragment : Fragment() {
         val root: View = binding.root
 
         val recyclerCompletedTasks: RecyclerView = binding.recyclerTasksCompleted
-//        val textView: TextView = binding.textDashboard
-//
-//        dashboardViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
 
-        dashboardViewModel.getCompletedTasks(dataBaseTask)
+        dashboardViewModel.getCompletedTasks()
 
         dashboardViewModel.tasksLiveData.observe(viewLifecycleOwner) { tasks ->
             val adapterCompletedTasks = ListTasksCompletedAdapter(
