@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetolitroz.R
-import com.example.projetolitroz.ui.home.recyclerview.TasksListAdapter
 import com.example.projetolitroz.ui.room.Tasks
 
 class ListTasksCompletedAdapter(
@@ -18,6 +17,7 @@ class ListTasksCompletedAdapter(
 
     class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val taskDescription: TextView = view.findViewById(R.id.task_description)
+        val buttonCompleted: AppCompatRadioButton = view.findViewById(R.id.task_button_completed)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -27,7 +27,8 @@ class ListTasksCompletedAdapter(
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = tasksCompleted[position]
-        holder.taskDescription.text = "ID: ${task.id} - Tarefa: ${task.taskName}" // Exibe o ID e o nome da tarefa
+        holder.taskDescription.text = "${task.taskName}"
+        holder.buttonCompleted.visibility = View.GONE
     }
 
     override fun getItemCount(): Int {

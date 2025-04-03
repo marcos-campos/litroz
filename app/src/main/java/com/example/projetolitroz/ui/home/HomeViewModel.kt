@@ -18,7 +18,6 @@ class HomeViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    // Lista de tarefas agora armazena TaskWithId
     private val _listTask = MutableLiveData<List<TaskWithId>>().apply {
 //        value = arrayListOf(
 //            TaskWithId(name = "Tarefa")
@@ -43,22 +42,13 @@ class HomeViewModel : ViewModel() {
     fun getTaskById(taskId: Int) {
         viewModelScope.launch {
             val task = database.tasksDao().getTaskById(taskId)
-            if (task != null) {
-                // Faça o que for necessário com a tarefa recuperada
-            }
         }
     }
 
     fun addTasks() {
         val currentList = _listTask.value?.toMutableList() ?: mutableListOf()
-
-        // Criar um novo nome de tarefa único
         val newTask = TaskWithId(name = "Tarefa ID: ${UUID.randomUUID().toString().take(8)}")
-
-        // Adiciona a tarefa com ID único à lista
         currentList.add(newTask)
-
-        // Atualiza a lista de tarefas
         _listTask.value = currentList
     }
 

@@ -56,15 +56,13 @@ class HomeFragment : Fragment() {
                 requireContext(),
                 tasks = listTasks,
                 onTaskCompleted = { task ->
-                    // Quando a tarefa for concluída, salva e remove a tarefa
                     val taskEntity = Tasks(taskName = task.name)
-                    homeViewModel.addTasksRoom(taskEntity) // Adiciona ao banco
-                    homeViewModel.removeTaskFromList(task) // Remove da lista
+                    homeViewModel.addTasksRoom(taskEntity)
+                    homeViewModel.removeTaskFromList(task)
                 }
             )
             recyclerTasks.adapter = adapterTasks
         }
-
         return root
     }
 

@@ -19,7 +19,7 @@ class DashboardViewModel : ViewModel() {
 
     fun getCompletedTasks(database: TasksDatabase) {
         viewModelScope.launch {
-            val tasks = database.tasksDao().getAll() // Aqui você pode buscar todas as tarefas ou com base em algum filtro
+            val tasks = database.tasksDao().getAll()
             tasksLiveData.postValue(tasks)
         }
     }

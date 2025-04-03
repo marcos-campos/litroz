@@ -44,15 +44,12 @@ class DashboardFragment : Fragment() {
         val recyclerCompletedTasks: RecyclerView = binding.recyclerTasksCompleted
         val textView: TextView = binding.textDashboard
 
-        // Observe o texto do ViewModel
         dashboardViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
 
-        // Carregar as tarefas concluídas do banco de dados
         dashboardViewModel.getCompletedTasks(dataBaseTask)
 
-        // Observe as tarefas recuperadas
         dashboardViewModel.tasksLiveData.observe(viewLifecycleOwner) { tasks ->
             val adapterCompletedTasks = ListTasksCompletedAdapter(
                 requireContext(),

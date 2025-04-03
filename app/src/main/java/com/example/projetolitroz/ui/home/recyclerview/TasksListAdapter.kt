@@ -37,7 +37,6 @@ class TasksListAdapter(
 
         val btn = holder.buttonCompleted
         btn.setOnClickListener {
-            // Passa a tarefa completa para a função de completar
             onTaskCompleted(task)
             Toast.makeText(context, "Tarefa ${task.name} concluída", Toast.LENGTH_SHORT).show()
         }
