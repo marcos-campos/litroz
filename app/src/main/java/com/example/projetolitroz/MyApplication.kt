@@ -3,6 +3,7 @@ package com.example.projetolitroz
 import android.app.Application
 import androidx.room.Room
 import com.example.projetolitroz.ui.completedTasks.CompletedTasksViewModel
+import com.example.projetolitroz.ui.detailsTasks.DetailsTasksViewModel
 import com.example.projetolitroz.ui.room.TasksDatabase
 import com.example.projetolitroz.ui.tasks.TasksViewModel
 import org.koin.android.ext.koin.androidContext
@@ -32,5 +33,6 @@ val appModule = module {
     }
 
     viewModel { TasksViewModel(get()) }
+    viewModel { DetailsTasksViewModel(get()) }
     viewModel { CompletedTasksViewModel(get()) }
 }

@@ -1,4 +1,4 @@
-package com.example.projetolitroz.ui.tasks
+package com.example.projetolitroz.ui.detailsTasks
 
 import android.os.Bundle
 import android.view.View
@@ -12,7 +12,7 @@ import com.example.projetolitroz.databinding.FragmentDetailsTasksBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class DetailsTasks : AppCompatActivity() {
+class DetailsTasksActivity : AppCompatActivity() {
 
     private var binding: FragmentDetailsTasksBinding? = null
     lateinit var taskName: String
@@ -25,7 +25,7 @@ class DetailsTasks : AppCompatActivity() {
     val buttonDelete by lazy { findViewById<Button>(R.id.button_delete_task) }
     val buttonEdit by lazy { findViewById<Button>(R.id.button_edit_task) }
 
-    private val homeViewModel: TasksViewModel by viewModel()
+    private val detailsViewModel: DetailsTasksViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,14 +53,14 @@ class DetailsTasks : AppCompatActivity() {
         }
 
         buttonDelete.setOnClickListener {
-            homeViewModel.removeTaskFromListById(idTask)
+            detailsViewModel.removeTaskFromListById(idTask)
             finish()
         }
 
         buttonSave.setOnClickListener {
             val newTaskGoal = editGoal.text.toString()
             if (newTaskGoal.isNotEmpty()) {
-                homeViewModel.updateTaskGoal(idTask, newTaskGoal)
+                detailsViewModel.updateTaskGoal(idTask, newTaskGoal)
                 finish()
             } else {
                 Toast.makeText(this, "Por favor, insira um objetivo válido", Toast.LENGTH_SHORT).show()

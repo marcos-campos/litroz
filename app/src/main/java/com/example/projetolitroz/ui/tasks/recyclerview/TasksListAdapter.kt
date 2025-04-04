@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetolitroz.R
-import com.example.projetolitroz.ui.tasks.DetailsTasks
+import com.example.projetolitroz.ui.detailsTasks.DetailsTasksActivity
 import com.example.projetolitroz.ui.tasks.TaskWithId
 
 class TasksListAdapter(
@@ -46,7 +46,7 @@ class TasksListAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(it.context, DetailsTasks::class.java)
+            val intent = Intent(it.context, DetailsTasksActivity::class.java)
 
             Log.e("@@@", "adapter : $tasks")
 
