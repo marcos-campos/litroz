@@ -20,13 +20,6 @@ class CompletedTasksFragment : Fragment() {
 
     private val dashboardViewModel: CompletedTasksViewModel by viewModel()
 
-    private val dataBaseTask by lazy {
-        Room.databaseBuilder(
-            requireContext(),
-            TasksDatabase::class.java,
-            "database")
-            .build()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

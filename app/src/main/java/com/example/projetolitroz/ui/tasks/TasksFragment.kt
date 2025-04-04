@@ -41,13 +41,12 @@ class TasksFragment : Fragment() {
                 requireContext(),
                 tasks = pendingTasks,
                 onTaskCompleted = { task ->
-                    homeViewModel.markTaskAsCompleted(task)  // Chama a função no ViewModel
+                    homeViewModel.markTaskAsCompleted(task)
                 }
             )
             recyclerTasks.adapter = adapterTasks
         }
 
-        // Carrega as tarefas quando o fragmento é criado
         homeViewModel.getTasks()
 
         return root

@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "tasks")
 data class Tasks(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,  // Identificador único da tarefa
-    @ColumnInfo(name = "taskName") val taskName: String, // Nome da tarefa
-    @ColumnInfo(name = "isCompleted") val isCompleted: Boolean = false // Indica se a tarefa foi concluída
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @ColumnInfo(name = "taskName") val taskName: String,
+    @ColumnInfo(name = "isCompleted") val isCompleted: Boolean = false
 )

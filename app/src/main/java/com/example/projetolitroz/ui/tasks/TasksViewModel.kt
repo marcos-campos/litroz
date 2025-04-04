@@ -35,7 +35,6 @@ class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
             val pendingTasks = taskWithIdList.filter { !it.isCompleted }
             val completedTasks = taskWithIdList.filter { it.isCompleted }
 
-            // Atualizando as listas separadas
             pendingTasksLiveData.postValue(pendingTasks)
             completedTasksLiveData.postValue(completedTasks)
         }
@@ -57,47 +56,41 @@ class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
     fun addTasks() {
         val currentList = _listTask.value?.toMutableList() ?: mutableListOf()
         val newTask = TaskWithId(
-            id = 0, // O Room irá gerar o id automaticamente, então você pode definir 0 ou um valor temporário aqui
+            id = 0,
             name = "Tarefa ID: ${UUID.randomUUID().toString().take(8)}",
-            isCompleted = false // Definindo a tarefa como não concluída
+            isCompleted = false
         )
         currentList.add(newTask)
         _listTask.value = currentList
 
-        // Agora, salvando a tarefa no banco de dados
         viewModelScope.launch {
-            val taskEntity = Tasks(taskName = newTask.name, isCompleted = false) // Tarefa não concluída
-            database.tasksDao().insertAll(taskEntity) // Insere a tarefa no banco de dados
+            val taskEntity = Tasks(taskName = newTask.name, isCompleted = false)
+            database.tasksDao().insertAll(taskEntity)
+            getTasks()
         }
     }
 
     fun removeTaskFromList(task: TaskWithId) {
         val currentList = _listTask.value?.toMutableList() ?: mutableListOf()
-        currentList.removeAll { it.id == task.id }  // Remover a tarefa com o id correspondente
+        currentList.removeAll { it.id == task.id }
         _listTask.value = currentList
     }
 
     fun markTaskAsCompleted(task: TaskWithId) {
         viewModelScope.launch {
             val updatedTask = Tasks(taskName = task.name, isCompleted = true, id = task.id)
+            database.tasksDao().updateTask(updatedTask)
 
-            // Agora, usamos o método de atualização
-            database.tasksDao().updateTask(updatedTask) // Atualiza a tarefa no banco de dados
-
-            // Atualiza a lista local (remove a tarefa de pendentes e adiciona a concluída)
             val currentPendingTasks = pendingTasksLiveData.value?.toMutableList() ?: mutableListOf()
             val currentCompletedTasks = completedTasksLiveData.value?.toMutableList() ?: mutableListOf()
 
-            // Remove a tarefa da lista de pendentes
             currentPendingTasks.removeAll { it.id == task.id }
-            // Adiciona a tarefa concluída à lista de concluídas
             currentCompletedTasks.add(TaskWithId(
                 id = updatedTask.id,
                 name = updatedTask.taskName,
                 isCompleted = updatedTask.isCompleted
             ))
 
-            // Atualiza as listas
             pendingTasksLiveData.postValue(currentPendingTasks)
             completedTasksLiveData.postValue(currentCompletedTasks)
         }

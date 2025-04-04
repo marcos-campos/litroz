@@ -15,9 +15,9 @@ interface TasksDao {
     @Query("SELECT * FROM tasks")
     suspend fun getAll(): List<Tasks>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)  // Quando inserir, ignora se o id já existir
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(vararg tasks: Tasks)
 
     @Update
-    suspend fun updateTask(task: Tasks) // Método para atualizar a tarefa
+    suspend fun updateTask(task: Tasks)
 }
