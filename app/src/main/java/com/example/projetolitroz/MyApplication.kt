@@ -19,7 +19,7 @@ class MyApplication : Application() {
 
         startKoin {
             androidContext(this@MyApplication)
-            modules(appModule) // Módulo com as definições das dependências
+            modules(appModule)
         }
     }
 }
