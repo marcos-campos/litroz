@@ -44,10 +44,10 @@ class TasksFragment : Fragment() {
         val buttonAddTask = binding.buttonAddTaskHome
         val editTaskGoal = binding.editTaskGoal
         buttonAddTask.setOnClickListener {
-            val taskGoal = editTaskGoal.text.toString() // Captura o objetivo
+            val taskGoal = editTaskGoal.text.toString()
 
             if (taskGoal.isNotEmpty()) {
-                homeViewModel.addTasks(taskGoal) // Passa o nome e objetivo
+                homeViewModel.addTasks(taskGoal)
             } else {
                 Toast.makeText(requireContext(), "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show()
             }

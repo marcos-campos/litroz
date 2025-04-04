@@ -7,11 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.projetolitroz.ui.room.Tasks
 import com.example.projetolitroz.ui.room.TasksDatabase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.UUID
 
 class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
-    val pendingTasksLiveData = MutableLiveData<List<TaskWithId>>() // Tarefas pendentes
+    val pendingTasksLiveData = MutableLiveData<List<TaskWithId>>()
     val completedTasksLiveData = MutableLiveData<List<TaskWithId>>()
 
     private val _text = MutableLiveData<String>().apply {
@@ -24,13 +26,15 @@ class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
 
     fun getTasks() {
         viewModelScope.launch {
-            val tasks = database.tasksDao().getAll()
+            val tasks = withContext(Dispatchers.IO) {
+                database.tasksDao().getAll()
+            }
             val taskWithIdList = tasks.map { task ->
                 TaskWithId(
                     id = task.id,
                     name = task.taskName,
                     isCompleted = task.isCompleted,
-                    taskGoal = task.taskGoal // Passando o objetivo da tarefa
+                    taskGoal = task.taskGoal
                 )
             }
 
@@ -44,7 +48,9 @@ class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
 
     fun updateTaskGoal(taskId: Int, newGoal: String) {
         viewModelScope.launch {
-            val task = database.tasksDao().getTaskById(taskId)
+            val task = withContext(Dispatchers.IO) {
+                database.tasksDao().getTaskById(taskId)
+            }
             if (task != null) {
                 val updatedTask = task.copy(taskGoal = newGoal)
                 database.tasksDao().updateTask(updatedTask)

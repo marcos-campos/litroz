@@ -51,6 +51,13 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.3.0")
 //    implementation("io.insert-koin:koin-androidx-workmanager:3.1.2")
 
+    //MockK, JUnit
+    testImplementation("io.mockk:mockk:1.13.3")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.1")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.0")
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
