@@ -1,6 +1,7 @@
 package com.example.projetolitroz.ui.tasks
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class TasksFragment : Fragment() {
 
         val recyclerTasks: RecyclerView = binding.recyclerHome
         homeViewModel.pendingTasksLiveData.observe(viewLifecycleOwner) { pendingTasks ->
+            Log.d("TasksFragment", "Tarefas pendentes atualizadas: ${pendingTasks.size}")
             val adapterTasks = TasksListAdapter(
                 requireContext(),
                 tasks = pendingTasks,

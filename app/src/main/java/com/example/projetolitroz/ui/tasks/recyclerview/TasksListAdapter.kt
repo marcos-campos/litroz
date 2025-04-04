@@ -1,6 +1,7 @@
 package com.example.projetolitroz.ui.tasks.recyclerview
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetolitroz.R
+import com.example.projetolitroz.ui.tasks.DetailsTasks
 import com.example.projetolitroz.ui.tasks.TaskWithId
 
 class TasksListAdapter(
@@ -41,5 +43,15 @@ class TasksListAdapter(
             onTaskCompleted(task)
             Toast.makeText(context, "Tarefa ${task.name} concluída", Toast.LENGTH_SHORT).show()
         }
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(it.context, DetailsTasks::class.java)
+
+            intent.putExtra("taskId", tasks[position].id)
+            intent.putExtra("taskName", tasks[position].name)
+            intent.putExtra("taskIsCompleted", tasks[position].isCompleted)
+            it.context.startActivity(intent)
+        }
+
     }
 }

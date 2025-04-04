@@ -76,6 +76,13 @@ class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
         _listTask.value = currentList
     }
 
+    fun removeTaskFromListById(taskId: Int) {
+        viewModelScope.launch {
+            database.tasksDao().deleteTaskById(taskId)
+            getTasks()
+        }
+    }
+
     fun markTaskAsCompleted(task: TaskWithId) {
         viewModelScope.launch {
             val updatedTask = Tasks(taskName = task.name, isCompleted = true, id = task.id)
