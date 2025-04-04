@@ -1,5 +1,6 @@
 package com.example.projetolitroz.ui.tasks
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -38,6 +39,19 @@ class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
 
             pendingTasksLiveData.postValue(pendingTasks)
             completedTasksLiveData.postValue(completedTasks)
+        }
+    }
+
+    fun updateTaskGoal(taskId: Int, newGoal: String) {
+        viewModelScope.launch {
+            val task = database.tasksDao().getTaskById(taskId)
+            if (task != null) {
+                val updatedTask = task.copy(taskGoal = newGoal)
+                database.tasksDao().updateTask(updatedTask)
+                getTasks()
+            } else {
+                Log.e("TasksViewModel", "Tarefa não encontrada com ID: $taskId")
+            }
         }
     }
 

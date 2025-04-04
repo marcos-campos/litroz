@@ -26,6 +26,11 @@ class TasksFragment : Fragment() {
 
     private val homeViewModel: TasksViewModel by viewModel()
 
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.getTasks()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,6 +38,8 @@ class TasksFragment : Fragment() {
     ): View {
         _binding = FragmentTasksBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        homeViewModel.getTasks()
 
         val buttonAddTask = binding.buttonAddTaskHome
         val editTaskGoal = binding.editTaskGoal
@@ -58,8 +65,6 @@ class TasksFragment : Fragment() {
             )
             recyclerTasks.adapter = adapterTasks
         }
-
-        homeViewModel.getTasks()
 
         return root
     }

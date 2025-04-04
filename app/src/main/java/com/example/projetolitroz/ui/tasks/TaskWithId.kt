@@ -6,5 +6,5 @@ data class TaskWithId(
     val id: Int,
     val name: String,
     val isCompleted: Boolean,
-    val taskGoal: String? // Adicionando o objetivo da tarefa
+    var taskGoal: String? // Adicionando o objetivo da tarefa
 )

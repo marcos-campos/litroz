@@ -30,6 +30,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="8dp" />
 
+    <EditText
+        android:id="@+id/edit_task_goal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Novo objetivo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_edit_task"
+        android:padding="8dp"
+        android:text=""/>
+
+    <Button
+        android:id="@+id/button_save_task_goal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/button_delete_task"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Salvar Edição"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"/>
+
+    <Button
+        android:id="@+id/button_edit_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="60dp"
+        android:layout_marginStart="10dp"
+        android:text="Editar tarefa"
+        android:layout_marginEnd="10dp"/>
+
     <Button
         android:id="@+id/button_delete_task"
         android:layout_width="wrap_content"

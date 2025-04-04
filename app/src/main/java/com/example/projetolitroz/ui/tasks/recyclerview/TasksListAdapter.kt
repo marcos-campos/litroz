@@ -2,6 +2,7 @@ package com.example.projetolitroz.ui.tasks.recyclerview
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,9 +48,11 @@ class TasksListAdapter(
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, DetailsTasks::class.java)
 
+            Log.e("@@@", "adapter : $tasks")
+
             intent.putExtra("taskId", tasks[position].id)
             intent.putExtra("taskName", tasks[position].name)
-            intent.putExtra("taskGoal", tasks[position].taskGoal) // Passa o objetivo
+            intent.putExtra("taskGoal", tasks[position].taskGoal)
             intent.putExtra("taskIsCompleted", tasks[position].isCompleted)
             it.context.startActivity(intent)
         }

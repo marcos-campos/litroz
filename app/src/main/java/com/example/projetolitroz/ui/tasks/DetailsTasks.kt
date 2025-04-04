@@ -2,7 +2,9 @@ package com.example.projetolitroz.ui.tasks
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projetolitroz.R
 import com.example.projetolitroz.databinding.FragmentDetailsTasksBinding
@@ -16,8 +18,10 @@ class DetailsTasks : AppCompatActivity() {
     lateinit var taskGoal: String // Agora também teremos o objetivo
     lateinit var dataTasks: Bundle
     val name by lazy { findViewById<TextView>(R.id.text_details_tasks) }
-    val goal by lazy { findViewById<TextView>(R.id.text_task_goal) } // Novo TextView para exibir o objetivo
-    val botao by lazy { findViewById<Button>(R.id.button_delete_task) }
+    val goal by lazy { findViewById<TextView>(R.id.text_task_goal) }
+    val editGoal by lazy { findViewById<EditText>(R.id.edit_task_goal) }
+    val buttonSave by lazy { findViewById<Button>(R.id.button_save_task_goal) }
+    val buttonDelete by lazy { findViewById<Button>(R.id.button_delete_task) }
 
     private val homeViewModel: TasksViewModel by viewModel()
 
@@ -38,11 +42,24 @@ class DetailsTasks : AppCompatActivity() {
         idTask = dataTasks.getInt("taskId") as Int
 
         name.text = taskName
-        goal.text = taskGoal // Exibe o objetivo na tela de detalhes
+        goal.text = "Objetivo: $taskGoal"
+        editGoal.setText(taskGoal) // Preenche o EditText com o objetivo atual
 
-        botao.setOnClickListener {
+        // Ação do botão para excluir a tarefa
+        buttonDelete.setOnClickListener {
             homeViewModel.removeTaskFromListById(idTask)
             finish()
+        }
+
+        // Ação do botão para salvar o novo objetivo
+        buttonSave.setOnClickListener {
+            val newTaskGoal = editGoal.text.toString()
+            if (newTaskGoal.isNotEmpty()) {
+                homeViewModel.updateTaskGoal(idTask, newTaskGoal)
+                finish() // Fecha a tela de detalhes
+            } else {
+                Toast.makeText(this, "Por favor, insira um objetivo válido", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
