@@ -2,7 +2,9 @@ package com.example.projetolitroz.ui.room
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface TasksDao {
@@ -13,6 +15,9 @@ interface TasksDao {
     @Query("SELECT * FROM tasks")
     suspend fun getAll(): List<Tasks>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)  // Quando inserir, ignora se o id já existir
     suspend fun insertAll(vararg tasks: Tasks)
+
+    @Update
+    suspend fun updateTask(task: Tasks) // Método para atualizar a tarefa
 }

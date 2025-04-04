@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,7 @@ class TasksFragment : Fragment() {
     private var _binding: FragmentTasksBinding? = null
     private val binding get() = _binding!!
 
-    private val homeViewModel: TasksViewModel by viewModel() // Injeção do ViewModel via Koin
+    private val homeViewModel: TasksViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,19 +36,19 @@ class TasksFragment : Fragment() {
         }
 
         val recyclerTasks: RecyclerView = binding.recyclerHome
-
-        homeViewModel.listTaskLiveData.observe(viewLifecycleOwner) { listTasks ->
+        homeViewModel.pendingTasksLiveData.observe(viewLifecycleOwner) { pendingTasks ->
             val adapterTasks = TasksListAdapter(
                 requireContext(),
-                tasks = listTasks,
+                tasks = pendingTasks,
                 onTaskCompleted = { task ->
-                    val taskEntity = Tasks(taskName = task.name)
-                    homeViewModel.addTasksRoom(taskEntity)
-                    homeViewModel.removeTaskFromList(task)
+                    homeViewModel.markTaskAsCompleted(task)  // Chama a função no ViewModel
                 }
             )
             recyclerTasks.adapter = adapterTasks
         }
+
+        // Carrega as tarefas quando o fragmento é criado
+        homeViewModel.getTasks()
 
         return root
     }

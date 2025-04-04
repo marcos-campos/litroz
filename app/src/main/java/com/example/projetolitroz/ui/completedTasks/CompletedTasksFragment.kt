@@ -18,7 +18,7 @@ class CompletedTasksFragment : Fragment() {
     private var _binding: FragmentCompletedTasksBinding? = null
     private val binding get() = _binding!!
 
-    private val dashboardViewModel: CompletedTasksViewModel by viewModel() // Injeção do ViewModel via Koin
+    private val dashboardViewModel: CompletedTasksViewModel by viewModel()
 
     private val dataBaseTask by lazy {
         Room.databaseBuilder(

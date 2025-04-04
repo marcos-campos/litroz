@@ -14,7 +14,7 @@ import com.example.projetolitroz.ui.tasks.TaskWithId
 class TasksListAdapter(
     private val context: Context,
     private val tasks: List<TaskWithId>,
-    private val onTaskCompleted: (TaskWithId) -> Unit
+    private val onTaskCompleted: (TaskWithId) -> Unit // Aqui você recebe a função
 ) : RecyclerView.Adapter<TasksListAdapter.TaskViewHolder>() {
 
     class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -37,6 +37,7 @@ class TasksListAdapter(
 
         val btn = holder.buttonCompleted
         btn.setOnClickListener {
+            // Aqui você chama a função onTaskCompleted que é passada como parâmetro
             onTaskCompleted(task)
             Toast.makeText(context, "Tarefa ${task.name} concluída", Toast.LENGTH_SHORT).show()
         }

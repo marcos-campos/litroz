@@ -19,7 +19,8 @@ class CompletedTasksViewModel(private val database: TasksDatabase) : ViewModel()
 
     fun getCompletedTasks() {
         viewModelScope.launch {
-            val tasks = database.tasksDao().getAll()
+            // Busca apenas as tarefas concluídas
+            val tasks = database.tasksDao().getAll().filter { it.isCompleted }
             tasksLiveData.postValue(tasks)
         }
     }
