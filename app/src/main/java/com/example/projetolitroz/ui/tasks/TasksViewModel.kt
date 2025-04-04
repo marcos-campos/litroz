@@ -55,19 +55,6 @@ class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
         }
     }
 
-    fun addTasksRoom(task: Tasks) {
-        viewModelScope.launch {
-            database.tasksDao().insertAll(task)
-            getTasks()
-        }
-    }
-
-    fun getTaskById(taskId: Int) {
-        viewModelScope.launch {
-            val task = database.tasksDao().getTaskById(taskId)
-        }
-    }
-
     fun addTasks(taskGoal: String) {
         val currentList = _listTask.value?.toMutableList() ?: mutableListOf()
         val newTask = TaskWithId(
@@ -84,12 +71,6 @@ class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
             database.tasksDao().insertAll(taskEntity)
             getTasks()
         }
-    }
-
-    fun removeTaskFromList(task: TaskWithId) {
-        val currentList = _listTask.value?.toMutableList() ?: mutableListOf()
-        currentList.removeAll { it.id == task.id }
-        _listTask.value = currentList
     }
 
     fun removeTaskFromListById(taskId: Int) {
