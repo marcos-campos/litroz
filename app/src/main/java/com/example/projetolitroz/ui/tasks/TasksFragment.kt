@@ -9,6 +9,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import androidx.room.Room
 import com.example.projetolitroz.databinding.FragmentTasksBinding
 import com.example.projetolitroz.ui.tasks.recyclerview.TasksListAdapter
@@ -32,8 +35,15 @@ class TasksFragment : Fragment() {
         val root: View = binding.root
 
         val buttonAddTask = binding.buttonAddTaskHome
+        val editTaskGoal = binding.editTaskGoal
         buttonAddTask.setOnClickListener {
-            homeViewModel.addTasks()
+            val taskGoal = editTaskGoal.text.toString() // Captura o objetivo
+
+            if (taskGoal.isNotEmpty()) {
+                homeViewModel.addTasks(taskGoal) // Passa o nome e objetivo
+            } else {
+                Toast.makeText(requireContext(), "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show()
+            }
         }
 
         val recyclerTasks: RecyclerView = binding.recyclerHome

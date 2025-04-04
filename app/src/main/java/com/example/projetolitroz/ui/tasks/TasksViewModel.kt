@@ -28,7 +28,8 @@ class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
                 TaskWithId(
                     id = task.id,
                     name = task.taskName,
-                    isCompleted = task.isCompleted
+                    isCompleted = task.isCompleted,
+                    taskGoal = task.taskGoal // Passando o objetivo da tarefa
                 )
             }
 
@@ -53,18 +54,19 @@ class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
         }
     }
 
-    fun addTasks() {
+    fun addTasks(taskGoal: String) {
         val currentList = _listTask.value?.toMutableList() ?: mutableListOf()
         val newTask = TaskWithId(
             id = 0,
             name = "Tarefa ID: ${UUID.randomUUID().toString().take(8)}",
-            isCompleted = false
+            isCompleted = false,
+            taskGoal = taskGoal
         )
         currentList.add(newTask)
         _listTask.value = currentList
 
         viewModelScope.launch {
-            val taskEntity = Tasks(taskName = newTask.name, isCompleted = false)
+            val taskEntity = Tasks(taskName = newTask.name, isCompleted = false, taskGoal = taskGoal)
             database.tasksDao().insertAll(taskEntity)
             getTasks()
         }
@@ -95,7 +97,8 @@ class TasksViewModel(private val database: TasksDatabase) : ViewModel() {
             currentCompletedTasks.add(TaskWithId(
                 id = updatedTask.id,
                 name = updatedTask.taskName,
-                isCompleted = updatedTask.isCompleted
+                isCompleted = updatedTask.isCompleted,
+                taskGoal = task.taskGoal
             ))
 
             pendingTasksLiveData.postValue(currentPendingTasks)

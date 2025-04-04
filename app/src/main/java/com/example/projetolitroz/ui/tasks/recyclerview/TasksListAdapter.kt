@@ -49,6 +49,7 @@ class TasksListAdapter(
 
             intent.putExtra("taskId", tasks[position].id)
             intent.putExtra("taskName", tasks[position].name)
+            intent.putExtra("taskGoal", tasks[position].taskGoal) // Passa o objetivo
             intent.putExtra("taskIsCompleted", tasks[position].isCompleted)
             it.context.startActivity(intent)
         }

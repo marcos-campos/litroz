@@ -13,9 +13,10 @@ class DetailsTasks : AppCompatActivity() {
 
     private var binding: FragmentDetailsTasksBinding? = null
     lateinit var taskName: String
+    lateinit var taskGoal: String // Agora também teremos o objetivo
     lateinit var dataTasks: Bundle
     val name by lazy { findViewById<TextView>(R.id.text_details_tasks) }
-    val id by lazy { findViewById<TextView>(R.id.id_details_tasks) }
+    val goal by lazy { findViewById<TextView>(R.id.text_task_goal) } // Novo TextView para exibir o objetivo
     val botao by lazy { findViewById<Button>(R.id.button_delete_task) }
 
     private val homeViewModel: TasksViewModel by viewModel()
@@ -33,13 +34,15 @@ class DetailsTasks : AppCompatActivity() {
         }
 
         taskName = dataTasks.getString("taskName") as String
+        taskGoal = dataTasks.getString("taskGoal") as String // Agora pegamos o objetivo da tarefa
         idTask = dataTasks.getInt("taskId") as Int
+
         name.text = taskName
+        goal.text = taskGoal // Exibe o objetivo na tela de detalhes
 
         botao.setOnClickListener {
             homeViewModel.removeTaskFromListById(idTask)
             finish()
         }
-
     }
 }

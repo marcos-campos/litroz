@@ -24,12 +24,21 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button_add_task_home"
+        app:layout_constraintBottom_toTopOf="@id/edit_task_goal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/task_item"
         tools:itemCount="5"/>
+
+    <EditText
+        android:id="@+id/edit_task_goal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Objetivo da tarefa"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_task_home"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         android:id="@+id/button_add_task_home"

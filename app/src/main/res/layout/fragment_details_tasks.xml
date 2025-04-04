@@ -20,6 +20,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/text_task_goal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Objetivo: "
+        app:layout_constraintTop_toBottomOf="@+id/text_details_tasks"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="8dp" />
+
     <Button
         android:id="@+id/button_delete_task"
         android:layout_width="wrap_content"
