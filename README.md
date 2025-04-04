@@ -34,10 +34,3 @@ id: Identificador único da tarefa.
 taskName: Nome da tarefa.
 isCompleted: Indicador se a tarefa foi concluída.
 taskGoal: Objetivo da tarefa.
-
-
-Como Executar o Projeto
-Requisitos
-Android Studio
-
-SDK do Android 30 ou superior
